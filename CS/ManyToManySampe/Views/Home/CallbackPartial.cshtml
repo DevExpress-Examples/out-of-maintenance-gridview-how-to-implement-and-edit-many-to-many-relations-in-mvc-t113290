@@ -1,0 +1,43 @@
+@Html.DevExpress().CallbackPanel(cbp => {
+    cbp.Name = "cbp";
+    cbp.CallbackRouteValues = new { Controller = "Home", Action = "CallbackAction" };
+    cbp.SetContent(() => {
+        ViewContext.Writer.Write("<table><tr><td>");
+
+        Html.RenderAction("UsersGridViewPartial");
+
+        ViewContext.Writer.Write("</td><td style='padding:5px'>");
+        
+        Html.DevExpress().Button(
+btnLink => {
+    btnLink.Name = "btnLink";
+    btnLink.Text = "Link User and Role";
+    btnLink.ClientSideEvents.Click = "onLinksModifying";
+}
+).Render();
+        ViewContext.Writer.Write("<br/><br/>");
+        Html.DevExpress().Button(
+        btnUnLink => {
+            btnUnLink.Name = "btnUnLink ";
+            btnUnLink.Text = "Unlink User And Role";
+            btnUnLink.ClientSideEvents.Click = "onLinksModifying";
+        }
+        ).Render();
+
+        ViewContext.Writer.Write("</td><td>");
+
+        Html.RenderAction("RolesGridViewPartial");
+
+        ViewContext.Writer.Write("</td></tr><tr style='height:50px'></tr><tr><td>");
+
+        Html.RenderAction("UserRolesPartial");
+
+        ViewContext.Writer.Write("</td><td></td><td>");
+
+        Html.RenderAction("UsersInRolePartial");
+
+        ViewContext.Writer.Write("</td></tr></table>");
+
+
+    });
+}).GetHtml()

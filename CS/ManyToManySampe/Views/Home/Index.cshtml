@@ -1,0 +1,28 @@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<script>
+    function onFocusedRowChanged(s, e) {
+        var key = s.GetRowKey(s.GetFocusedRowIndex());
+        if (s.name == "Users")
+            UserRoles.PerformCallback({ userID: key });
+        else
+            UsersInRole.PerformCallback({ roleID: key });
+    }
+    function onLinksModifying(s, e) {
+        var isLink = s.name == "btnLink";
+        var userId = Users.GetRowKey(Users.GetFocusedRowIndex());
+        var roleId = Roles.GetRowKey(Roles.GetFocusedRowIndex());
+        cbp.PerformCallback({ userID: userId, roleID: roleId, isLink: isLink });
+    }
+</script>
+@Html.Action("CallbackAction")
+
+
+
+
+
+
+

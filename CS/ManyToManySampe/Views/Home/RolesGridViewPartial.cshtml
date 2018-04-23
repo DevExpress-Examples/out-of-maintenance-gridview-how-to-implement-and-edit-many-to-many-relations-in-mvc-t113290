@@ -1,0 +1,14 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "Roles";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "RolesGridViewPartial" };
+        settings.Settings.ShowTitlePanel = true;
+        settings.SetTitlePanelTemplateContent("Roles");
+        settings.KeyFieldName = "RoleID";
+        settings.SettingsBehavior.AllowFocusedRow = true;
+        settings.ClientSideEvents.FocusedRowChanged = "onFocusedRowChanged";
+        settings.Columns.Add("RoleID");
+        settings.Columns.Add("RoleName");
+    });
+}
+@grid.Bind(Model).GetHtml()

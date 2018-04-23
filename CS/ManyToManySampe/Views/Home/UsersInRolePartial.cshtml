@@ -1,0 +1,15 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "UsersInRole";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "UsersInRolePartial" };
+
+        settings.Settings.ShowTitlePanel = true;
+
+        settings.SetTitlePanelTemplateContent("Users In Role");
+        settings.KeyFieldName = "UserID";
+        settings.Columns.Add("UserID");
+        settings.Columns.Add("UserName");
+
+    });
+}
+@grid.Bind(ViewData["UsersInRole"]).GetHtml()
